@@ -1,0 +1,3930 @@
+{
+  "createdAt" : 0,
+  "displayName" : "EHXR",
+  "manifest" : {
+    "capabilities" : [
+      "authentication",
+      "ratings",
+      "downloads",
+      "detail",
+      "reader",
+      "favorites",
+      "imageSearch",
+      "history",
+      "comments",
+      "search",
+      "torrents",
+      "profile",
+      "browse",
+      "archives",
+      "announcements"
+    ],
+    "contentPolicy" : "userImported",
+    "displayName" : "EHXR",
+    "id" : "ehxr",
+    "runtimePlan" : {
+      "enabledPanels" : [
+        "quickSearch",
+        "accountUsage",
+        "downloads",
+        "comments",
+        "imageSearch",
+        "archives",
+        "favorites",
+        "rating",
+        "browse",
+        "pagePreviews",
+        "subscriptions",
+        "advancedSearch",
+        "reader",
+        "announcements",
+        "search",
+        "whatsHot",
+        "torrents",
+        "bookmarks",
+        "history",
+        "galleryDetail",
+        "toplist",
+        "settings",
+        "profile",
+        "sourceSelection",
+        "contentFilters"
+      ],
+      "primitives" : [
+        "pageResource",
+        "paginatedCatalog",
+        "downloadQueue",
+        "announcements",
+        "htmlParsing",
+        "quickSearch",
+        "alternatePageResource",
+        "authenticatedSession",
+        "cache",
+        "profile",
+        "contentFilter",
+        "searchCatalog",
+        "commentsMutation",
+        "favoritesMutation",
+        "multipartUpload",
+        "resourceRequestHeaders",
+        "favoritesCatalog",
+        "localHistory",
+        "commentsCatalog",
+        "formSubmission",
+        "usernamePasswordLogin",
+        "ratingMutation",
+        "previewPages",
+        "cookieStore",
+        "advancedSearch",
+        "watchedTags",
+        "directURLPagination",
+        "tagTranslation",
+        "reverseImageSearch",
+        "endpointSelection",
+        "webAuthentication",
+        "httpRequest",
+        "localBookmarks",
+        "detailMetadata",
+        "torrentResource",
+        "accountUsageControl",
+        "importedCookieLogin",
+        "jsonParsing",
+        "archiveResource"
+      ]
+    },
+    "supportedImportTypes" : [
+      "prism-source+json"
+    ],
+    "updateURL" : "https://raw.githubusercontent.com/linggan-ua/prismxr-reader-sources/main/EHXR/source-update.json",
+    "version" : "1.1.0"
+  },
+  "parameters" : {
+
+  },
+  "runtime" : {
+    "actions" : {
+      "comments" : {
+        "allRequest" : {
+          "body" : {
+
+          },
+          "bodyEncoding" : "none",
+          "bodyValueTypes" : {
+
+          },
+          "headers" : {
+
+          },
+          "method" : "GET",
+          "path" : "{{book.id}}",
+          "queryItems" : {
+            "hc" : "1"
+          }
+        },
+        "comment" : {
+          "author" : {
+            "allMatches" : false,
+            "expression" : ".c3 a",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssText",
+            "separator" : ",",
+            "transforms" : [
+
+            ]
+          },
+          "canVote" : {
+            "allMatches" : false,
+            "expression" : ".c4 a[id^='comment_vote_up_'], .c4 a[id^='comment_vote_down_']",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssExists",
+            "separator" : ",",
+            "transforms" : [
+
+            ]
+          },
+          "date" : {
+            "allMatches" : false,
+            "expression" : ".c3",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssOwnText",
+            "separator" : ",",
+            "transforms" : [
+
+            ]
+          },
+          "editable" : {
+            "allMatches" : false,
+            "expression" : ".c4 a:containsOwn(Edit)",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssExists",
+            "separator" : ",",
+            "transforms" : [
+
+            ]
+          },
+          "id" : {
+            "allMatches" : false,
+            "attribute" : "id",
+            "expression" : ".c6[id^='comment_']",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssAttribute",
+            "separator" : ",",
+            "transforms" : [
+              {
+                "captureGroup" : 0,
+                "kind" : "literalReplacement",
+                "pattern" : "comment_",
+                "replacement" : ""
+              }
+            ]
+          },
+          "isDownvoted" : {
+            "allMatches" : false,
+            "attribute" : "style",
+            "expression" : ".c4 a[id^='comment_vote_down_']",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssAttributeExists",
+            "separator" : ",",
+            "transforms" : [
+
+            ]
+          },
+          "isUpvoted" : {
+            "allMatches" : false,
+            "attribute" : "style",
+            "expression" : ".c4 a[id^='comment_vote_up_']",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssAttributeExists",
+            "separator" : ",",
+            "transforms" : [
+
+            ]
+          },
+          "score" : {
+            "allMatches" : false,
+            "expression" : ".c5 span[id^='comment_score_'], .c5 > :first-child",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssText",
+            "separator" : ",",
+            "transforms" : [
+              {
+                "captureGroup" : 0,
+                "kind" : "literalReplacement",
+                "pattern" : "+",
+                "replacement" : ""
+              }
+            ]
+          },
+          "text" : {
+            "allMatches" : false,
+            "expression" : ".c6",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssText",
+            "separator" : ",",
+            "transforms" : [
+
+            ]
+          }
+        },
+        "editRequest" : {
+          "body" : {
+            "commenttext_edit" : "{{action.text}}",
+            "edit_comment" : "{{action.commentID}}"
+          },
+          "bodyEncoding" : "form",
+          "bodyValueTypes" : {
+
+          },
+          "headers" : {
+            "Origin" : "{{source.origin}}",
+            "Referer" : "{{source.origin}}{{book.id}}"
+          },
+          "method" : "POST",
+          "path" : "{{book.id}}",
+          "queryItems" : {
+
+          }
+        },
+        "format" : "html",
+        "hasMore" : {
+          "allMatches" : false,
+          "expression" : "#chd p:not(#postnewcomment)",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssExists",
+          "separator" : ",",
+          "transforms" : [
+
+          ]
+        },
+        "items" : {
+          "expression" : "#cdiv > .c1",
+          "kind" : "css"
+        },
+        "listRequest" : {
+          "body" : {
+
+          },
+          "bodyEncoding" : "none",
+          "bodyValueTypes" : {
+
+          },
+          "headers" : {
+
+          },
+          "method" : "GET",
+          "path" : "{{book.id}}",
+          "queryItems" : {
+
+          }
+        },
+        "originalComment" : {
+          "allMatches" : false,
+          "expression" : "editable_comment",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "jsonPath",
+          "separator" : ",",
+          "transforms" : [
+
+          ]
+        },
+        "originalRequest" : {
+          "body" : {
+            "apikey" : "{{comments.apikey}}",
+            "apiuid" : "{{comments.apiuid}}",
+            "comment_id" : "{{action.commentID}}",
+            "gid" : "{{action.gid}}",
+            "method" : "geteditcomment",
+            "token" : "{{action.token}}"
+          },
+          "bodyEncoding" : "json",
+          "bodyValueTypes" : {
+            "apiuid" : "integer",
+            "comment_id" : "integer",
+            "gid" : "integer"
+          },
+          "headers" : {
+            "Origin" : "{{source.origin}}",
+            "Referer" : "{{source.origin}}{{book.id}}"
+          },
+          "method" : "POST",
+          "path" : "/api.php",
+          "queryItems" : {
+
+          }
+        },
+        "originalResponseFormat" : "json",
+        "originalText" : {
+          "allMatches" : false,
+          "expression" : "textarea[name=commenttext_edit]",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssTextContent",
+          "separator" : ",",
+          "transforms" : [
+
+          ]
+        },
+        "postRequest" : {
+          "body" : {
+            "commenttext_new" : "{{action.text}}"
+          },
+          "bodyEncoding" : "form",
+          "bodyValueTypes" : {
+
+          },
+          "headers" : {
+            "Origin" : "{{source.origin}}",
+            "Referer" : "{{source.origin}}{{book.id}}"
+          },
+          "method" : "POST",
+          "path" : "{{book.id}}",
+          "queryItems" : {
+
+          }
+        },
+        "responseContext" : {
+          "apikey" : {
+            "allMatches" : true,
+            "expression" : "script",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssHTML",
+            "separator" : "\n",
+            "transforms" : [
+              {
+                "captureGroup" : 1,
+                "kind" : "regularExpressionCapture",
+                "pattern" : "var apikey = \\\"([a-f0-9]+)\\\";",
+                "replacement" : ""
+              }
+            ]
+          },
+          "apiuid" : {
+            "allMatches" : true,
+            "expression" : "script",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssHTML",
+            "separator" : "\n",
+            "transforms" : [
+              {
+                "captureGroup" : 1,
+                "kind" : "regularExpressionCapture",
+                "pattern" : "var apiuid = (-?[0-9]+);",
+                "replacement" : ""
+              }
+            ]
+          }
+        },
+        "voteRequest" : {
+          "body" : {
+            "apikey" : "{{comments.apikey}}",
+            "apiuid" : "{{comments.apiuid}}",
+            "comment_id" : "{{action.commentID}}",
+            "comment_vote" : "{{action.vote}}",
+            "gid" : "{{action.gid}}",
+            "method" : "votecomment",
+            "token" : "{{action.token}}"
+          },
+          "bodyEncoding" : "json",
+          "bodyValueTypes" : {
+            "apiuid" : "integer",
+            "comment_id" : "integer",
+            "comment_vote" : "integer",
+            "gid" : "integer"
+          },
+          "headers" : {
+            "Origin" : "{{source.origin}}",
+            "Referer" : "{{source.origin}}"
+          },
+          "method" : "POST",
+          "path" : "/api.php",
+          "queryItems" : {
+
+          }
+        },
+        "voteResponse" : {
+          "commentID" : {
+            "allMatches" : false,
+            "expression" : "comment_id",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "jsonPath",
+            "separator" : ",",
+            "transforms" : [
+
+            ]
+          },
+          "score" : {
+            "allMatches" : false,
+            "expression" : "comment_score",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "jsonPath",
+            "separator" : ",",
+            "transforms" : [
+
+            ]
+          },
+          "vote" : {
+            "allMatches" : false,
+            "expression" : "comment_vote",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "jsonPath",
+            "separator" : ",",
+            "transforms" : [
+
+            ]
+          }
+        },
+        "voteResponseFormat" : "json"
+      },
+      "contextValues" : {
+        "gid" : {
+          "transforms" : [
+            {
+              "captureGroup" : 1,
+              "kind" : "regularExpressionCapture",
+              "pattern" : "(?i)/g/([0-9]+)/",
+              "replacement" : ""
+            }
+          ],
+          "value" : "{{book.id}}"
+        },
+        "token" : {
+          "transforms" : [
+            {
+              "captureGroup" : 1,
+              "kind" : "regularExpressionCapture",
+              "pattern" : "(?i)/g/[0-9]+/([^/?#]+)",
+              "replacement" : ""
+            }
+          ],
+          "value" : "{{book.id}}"
+        }
+      },
+      "favorites" : {
+        "addRequest" : {
+          "body" : {
+            "favcat" : "{{action.category}}",
+            "favnote" : "{{action.note}}",
+            "submit" : "Apply Changes",
+            "update" : "1"
+          },
+          "bodyEncoding" : "form",
+          "bodyValueTypes" : {
+
+          },
+          "headers" : {
+            "Referer" : "{{source.origin}}/gallerypopups.php?gid={{action.gid}}&t={{action.token}}&act=addfav"
+          },
+          "method" : "POST",
+          "path" : "/gallerypopups.php",
+          "queryItems" : {
+            "act" : "addfav",
+            "gid" : "{{action.gid}}",
+            "t" : "{{action.token}}"
+          }
+        },
+        "removeRequest" : {
+          "body" : {
+            "favcat" : "favdel",
+            "submit" : "Apply Changes",
+            "update" : "1"
+          },
+          "bodyEncoding" : "form",
+          "bodyValueTypes" : {
+
+          },
+          "headers" : {
+            "Referer" : "{{source.origin}}/gallerypopups.php?gid={{action.gid}}&t={{action.token}}&act=addfav"
+          },
+          "method" : "POST",
+          "path" : "/gallerypopups.php",
+          "queryItems" : {
+            "act" : "addfav",
+            "gid" : "{{action.gid}}",
+            "t" : "{{action.token}}"
+          }
+        }
+      },
+      "rating" : {
+        "maximumRating" : 5,
+        "minimumRating" : 1,
+        "request" : {
+          "body" : {
+            "gid" : "{{action.gid}}",
+            "method" : "rategallery",
+            "rating" : "{{action.rating}}",
+            "token" : "{{action.token}}"
+          },
+          "bodyEncoding" : "json",
+          "bodyValueTypes" : {
+            "gid" : "integer",
+            "rating" : "integer"
+          },
+          "headers" : {
+            "Origin" : "{{source.origin}}",
+            "Referer" : "{{source.origin}}{{book.id}}"
+          },
+          "method" : "POST",
+          "path" : "/api.php",
+          "queryItems" : {
+
+          }
+        },
+        "requestMultiplier" : 2
+      }
+    },
+    "announcements" : {
+      "announcement" : {
+        "body" : {
+          "allMatches" : false,
+          "expression" : ".newstext",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssText",
+          "separator" : ",",
+          "transforms" : [
+
+          ]
+        },
+        "date" : {
+          "allMatches" : false,
+          "expression" : ".newsdate",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssText",
+          "separator" : ",",
+          "transforms" : [
+
+          ]
+        },
+        "title" : {
+          "allMatches" : false,
+          "expression" : ".newstitle",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssText",
+          "separator" : ",",
+          "transforms" : [
+
+          ]
+        }
+      },
+      "format" : "html",
+      "items" : {
+        "expression" : ".newstable",
+        "kind" : "css"
+      },
+      "request" : {
+        "body" : {
+
+        },
+        "bodyEncoding" : "none",
+        "bodyValueTypes" : {
+
+        },
+        "headers" : {
+
+        },
+        "method" : "GET",
+        "path" : "/news.php",
+        "queryItems" : {
+          "page" : "{{page}}"
+        }
+      }
+    },
+    "archives" : {
+      "downloadLinkSelectors" : [
+        {
+          "allMatches" : false,
+          "attribute" : "href",
+          "expression" : "a[href]:contains(Click Here To Start Downloading)",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssAttribute",
+          "separator" : ",",
+          "transforms" : [
+
+          ]
+        },
+        {
+          "allMatches" : true,
+          "expression" : "script",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssHTML",
+          "separator" : "\n",
+          "transforms" : [
+            {
+              "captureGroup" : 1,
+              "kind" : "regularExpressionCapture",
+              "pattern" : "document\\.location\\s*=\\s*[\"']([^\"']+)[\"']",
+              "replacement" : ""
+            }
+          ]
+        }
+      ],
+      "format" : "html",
+      "groups" : [
+        {
+          "actionHint" : "Download with H@H",
+          "hathOr" : {
+            "allMatches" : false,
+            "attribute" : "action",
+            "expression" : "#hathdl_form",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssAttribute",
+            "separator" : ",",
+            "transforms" : [
+              {
+                "captureGroup" : 1,
+                "kind" : "regularExpressionCapture",
+                "pattern" : "[?&]or=([^&\\\"]+)",
+                "replacement" : ""
+              }
+            ]
+          },
+          "id" : "hath",
+          "items" : {
+            "expression" : "a[onclick*=do_hathdl]",
+            "kind" : "css"
+          },
+          "resource" : {
+            "capturesFormFields" : false,
+            "hathResolution" : {
+              "allMatches" : false,
+              "attribute" : "onclick",
+              "expression" : "",
+              "fallbackAttributes" : [
+
+              ],
+              "kind" : "cssAttribute",
+              "separator" : ",",
+              "transforms" : [
+                {
+                  "captureGroup" : 1,
+                  "kind" : "regularExpressionCapture",
+                  "pattern" : "do_hathdl\\('([0-9]+|org)'\\)",
+                  "replacement" : ""
+                }
+              ]
+            },
+            "title" : {
+              "allMatches" : false,
+              "expression" : "",
+              "fallbackAttributes" : [
+
+              ],
+              "kind" : "cssText",
+              "separator" : ",",
+              "transforms" : [
+
+              ]
+            }
+          },
+          "sectionTitle" : "H@H Download",
+          "systemImageName" : "externaldrive.badge.icloud",
+          "title" : "H@H"
+        },
+        {
+          "actionHint" : "Request archive download",
+          "id" : "archiver",
+          "items" : {
+            "expression" : "form:has(input[name='dltype']), form:has(input[name='dlcheck'])",
+            "kind" : "css"
+          },
+          "resource" : {
+            "actionURL" : {
+              "allMatches" : false,
+              "attribute" : "action",
+              "expression" : "",
+              "fallbackAttributes" : [
+
+              ],
+              "kind" : "cssAttribute",
+              "separator" : ",",
+              "transforms" : [
+
+              ]
+            },
+            "capturesFormFields" : true,
+            "title" : {
+              "allMatches" : false,
+              "attribute" : "value",
+              "expression" : "input[name='dlcheck']",
+              "fallbackAttributes" : [
+
+              ],
+              "kind" : "cssAttribute",
+              "separator" : ",",
+              "transforms" : [
+
+              ]
+            }
+          },
+          "sectionTitle" : "Archiver Download",
+          "systemImageName" : "shippingbox",
+          "title" : "Archiver"
+        }
+      ],
+      "request" : {
+        "body" : {
+
+        },
+        "bodyEncoding" : "none",
+        "bodyValueTypes" : {
+
+        },
+        "headers" : {
+
+        },
+        "method" : "GET",
+        "path" : "/archiver.php",
+        "queryItems" : {
+          "gid" : "{{context.gid}}",
+          "t" : "{{context.token}}"
+        }
+      },
+      "sentMessage" : "Archive request sent. Check account GP or H@H requirements."
+    },
+    "authentication" : {
+      "credentialPresentation" : {
+        "accessCookieName" : "igneous",
+        "identifierCookieName" : "ipb_member_id",
+        "secretCookieName" : "ipb_pass_hash"
+      },
+      "invalidCookieValues" : {
+        "igneous" : [
+          "mystery",
+          "0",
+          "",
+          "yay"
+        ]
+      },
+      "methods" : [
+        {
+          "fields" : [
+            {
+              "id" : "username",
+              "isOptional" : false,
+              "isSecure" : false,
+              "placeholder" : "",
+              "title" : "Username"
+            },
+            {
+              "id" : "password",
+              "isOptional" : false,
+              "isSecure" : true,
+              "placeholder" : "",
+              "title" : "Password"
+            }
+          ],
+          "id" : "password",
+          "importedCookies" : [
+
+          ],
+          "kind" : "credentials",
+          "request" : {
+            "body" : {
+              "CookieDate" : "1",
+              "PassWord" : "{{auth.password}}",
+              "UserName" : "{{auth.username}}",
+              "submit" : "Log me in",
+              "temporary_https" : "off"
+            },
+            "bodyEncoding" : "form",
+            "bodyValueTypes" : {
+
+            },
+            "headers" : {
+              "Origin" : "https://forums.e-hentai.org/",
+              "Referer" : "https://forums.e-hentai.org/"
+            },
+            "method" : "POST",
+            "path" : "https://forums.e-hentai.org/index.php?act=Login&CODE=01",
+            "queryItems" : {
+
+            }
+          },
+          "title" : "Username and Password"
+        },
+        {
+          "fields" : [
+            {
+              "id" : "memberID",
+              "isOptional" : false,
+              "isSecure" : true,
+              "placeholder" : "",
+              "title" : "ipb_member_id"
+            },
+            {
+              "id" : "passHash",
+              "isOptional" : false,
+              "isSecure" : true,
+              "placeholder" : "",
+              "title" : "ipb_pass_hash"
+            },
+            {
+              "id" : "igneous",
+              "isOptional" : true,
+              "isSecure" : true,
+              "placeholder" : "Optional",
+              "title" : "igneous"
+            }
+          ],
+          "id" : "cookies",
+          "importedCookies" : [
+            {
+              "domain" : "e-hentai.org",
+              "isHTTPOnly" : true,
+              "isSecure" : true,
+              "name" : "ipb_member_id",
+              "path" : "/",
+              "valueFieldID" : "memberID"
+            },
+            {
+              "domain" : "e-hentai.org",
+              "isHTTPOnly" : true,
+              "isSecure" : true,
+              "name" : "ipb_pass_hash",
+              "path" : "/",
+              "valueFieldID" : "passHash"
+            },
+            {
+              "domain" : "exhentai.org",
+              "isHTTPOnly" : true,
+              "isSecure" : true,
+              "name" : "ipb_member_id",
+              "path" : "/",
+              "valueFieldID" : "memberID"
+            },
+            {
+              "domain" : "exhentai.org",
+              "isHTTPOnly" : true,
+              "isSecure" : true,
+              "name" : "ipb_pass_hash",
+              "path" : "/",
+              "valueFieldID" : "passHash"
+            },
+            {
+              "domain" : "forums.e-hentai.org",
+              "isHTTPOnly" : true,
+              "isSecure" : true,
+              "name" : "ipb_member_id",
+              "path" : "/",
+              "valueFieldID" : "memberID"
+            },
+            {
+              "domain" : "forums.e-hentai.org",
+              "isHTTPOnly" : true,
+              "isSecure" : true,
+              "name" : "ipb_pass_hash",
+              "path" : "/",
+              "valueFieldID" : "passHash"
+            },
+            {
+              "domain" : "exhentai.org",
+              "isHTTPOnly" : true,
+              "isSecure" : true,
+              "name" : "igneous",
+              "path" : "/",
+              "valueFieldID" : "igneous"
+            },
+            {
+              "domain" : "e-hentai.org",
+              "fixedValue" : "1",
+              "isHTTPOnly" : true,
+              "isSecure" : true,
+              "name" : "nw",
+              "path" : "/"
+            },
+            {
+              "domain" : "exhentai.org",
+              "fixedValue" : "1",
+              "isHTTPOnly" : true,
+              "isSecure" : true,
+              "name" : "nw",
+              "path" : "/"
+            }
+          ],
+          "kind" : "importedCookies",
+          "title" : "Cookies"
+        },
+        {
+          "fields" : [
+            {
+              "id" : "memberID",
+              "isOptional" : false,
+              "isSecure" : true,
+              "placeholder" : "",
+              "title" : "ipb_member_id"
+            },
+            {
+              "id" : "passHash",
+              "isOptional" : false,
+              "isSecure" : true,
+              "placeholder" : "",
+              "title" : "ipb_pass_hash"
+            },
+            {
+              "id" : "igneous",
+              "isOptional" : true,
+              "isSecure" : true,
+              "placeholder" : "Optional",
+              "title" : "igneous"
+            }
+          ],
+          "id" : "web",
+          "importedCookies" : [
+            {
+              "domain" : "e-hentai.org",
+              "isHTTPOnly" : true,
+              "isSecure" : true,
+              "name" : "ipb_member_id",
+              "path" : "/",
+              "valueFieldID" : "memberID"
+            },
+            {
+              "domain" : "e-hentai.org",
+              "isHTTPOnly" : true,
+              "isSecure" : true,
+              "name" : "ipb_pass_hash",
+              "path" : "/",
+              "valueFieldID" : "passHash"
+            },
+            {
+              "domain" : "exhentai.org",
+              "isHTTPOnly" : true,
+              "isSecure" : true,
+              "name" : "ipb_member_id",
+              "path" : "/",
+              "valueFieldID" : "memberID"
+            },
+            {
+              "domain" : "exhentai.org",
+              "isHTTPOnly" : true,
+              "isSecure" : true,
+              "name" : "ipb_pass_hash",
+              "path" : "/",
+              "valueFieldID" : "passHash"
+            },
+            {
+              "domain" : "forums.e-hentai.org",
+              "isHTTPOnly" : true,
+              "isSecure" : true,
+              "name" : "ipb_member_id",
+              "path" : "/",
+              "valueFieldID" : "memberID"
+            },
+            {
+              "domain" : "forums.e-hentai.org",
+              "isHTTPOnly" : true,
+              "isSecure" : true,
+              "name" : "ipb_pass_hash",
+              "path" : "/",
+              "valueFieldID" : "passHash"
+            },
+            {
+              "domain" : "exhentai.org",
+              "isHTTPOnly" : true,
+              "isSecure" : true,
+              "name" : "igneous",
+              "path" : "/",
+              "valueFieldID" : "igneous"
+            },
+            {
+              "domain" : "e-hentai.org",
+              "fixedValue" : "1",
+              "isHTTPOnly" : true,
+              "isSecure" : true,
+              "name" : "nw",
+              "path" : "/"
+            },
+            {
+              "domain" : "exhentai.org",
+              "fixedValue" : "1",
+              "isHTTPOnly" : true,
+              "isSecure" : true,
+              "name" : "nw",
+              "path" : "/"
+            }
+          ],
+          "kind" : "webLogin",
+          "message" : "Sign in inside the built-in browser; the login is detected automatically.",
+          "title" : "Web Login",
+          "webLogin" : {
+            "loginURL" : "https://forums.e-hentai.org/index.php?act=Login"
+          }
+        }
+      ],
+      "requiredCookieNames" : [
+        "ipb_member_id",
+        "ipb_pass_hash"
+      ],
+      "title" : "Account"
+    },
+    "baseURL" : "https://e-hentai.org/",
+    "catalog" : {
+      "book" : {
+        "authors" : {
+          "allMatches" : false,
+          "expression" : "a[href*='/uploader/']",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssText",
+          "separator" : ",",
+          "transforms" : [
+
+          ]
+        },
+        "authorsSeparator" : ",",
+        "coverURL" : {
+          "allMatches" : false,
+          "attribute" : "data-src",
+          "expression" : "img",
+          "fallbackAttributes" : [
+            "src",
+            "srcset"
+          ],
+          "kind" : "cssAttribute",
+          "separator" : ",",
+          "transforms" : [
+            {
+              "captureGroup" : 1,
+              "kind" : "regularExpressionCapture",
+              "pattern" : "^(\\S+)",
+              "replacement" : ""
+            }
+          ]
+        },
+        "id" : {
+          "allMatches" : false,
+          "attribute" : "href",
+          "expression" : "a[href*='/g/']",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssAttribute",
+          "separator" : ",",
+          "transforms" : [
+            {
+              "captureGroup" : 1,
+              "kind" : "regularExpressionCapture",
+              "pattern" : "(?i)(/g/[0-9]+/[^/?#]+/?)",
+              "replacement" : ""
+            }
+          ]
+        },
+        "metadata" : {
+          "reader.badgeColorHex" : {
+            "allMatches" : false,
+            "expression" : ".cn, .cs, .glcat",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssText",
+            "separator" : ",",
+            "transforms" : [
+              {
+                "captureGroup" : 0,
+                "kind" : "lookupValue",
+                "pattern" : "categoryColors",
+                "replacement" : ""
+              }
+            ]
+          },
+          "reader.badgeTitle" : {
+            "allMatches" : false,
+            "expression" : ".cn, .cs, .glcat",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssText",
+            "separator" : ",",
+            "transforms" : [
+
+            ]
+          },
+          "reader.language" : {
+            "allMatches" : true,
+            "attribute" : "title",
+            "expression" : ".gt",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssAttribute",
+            "separator" : "\n",
+            "transforms" : [
+              {
+                "captureGroup" : 1,
+                "kind" : "regularExpressionCapture",
+                "pattern" : "(?i)language:([a-z ]+)",
+                "replacement" : ""
+              }
+            ]
+          },
+          "reader.published" : {
+            "allMatches" : false,
+            "expression" : "[id^='posted_']",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssText",
+            "separator" : ",",
+            "transforms" : [
+
+            ]
+          },
+          "reader.rating" : {
+            "allMatches" : false,
+            "attribute" : "style",
+            "expression" : ".ir",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssAttribute",
+            "separator" : ",",
+            "transforms" : [
+              {
+                "captureGroup" : 0,
+                "kind" : "backgroundPositionRating",
+                "pattern" : "",
+                "replacement" : ""
+              }
+            ]
+          },
+          "tags" : {
+            "allMatches" : true,
+            "attribute" : "title",
+            "expression" : ".gt",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssAttribute",
+            "separator" : "\n",
+            "transforms" : [
+
+            ]
+          }
+        },
+        "pageCount" : {
+          "allMatches" : true,
+          "expression" : ".glthumb, .glhide, .gl3e, .gl5t",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssText",
+          "separator" : " ",
+          "transforms" : [
+            {
+              "captureGroup" : 1,
+              "kind" : "regularExpressionCapture",
+              "pattern" : "(?i)([\\d,]+)\\s+pages?",
+              "replacement" : ""
+            },
+            {
+              "captureGroup" : 0,
+              "kind" : "literalReplacement",
+              "pattern" : ",",
+              "replacement" : ""
+            }
+          ]
+        },
+        "title" : {
+          "allMatches" : false,
+          "expression" : ".glink",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssText",
+          "separator" : ",",
+          "transforms" : [
+
+          ]
+        }
+      },
+      "format" : "html",
+      "hasMore" : {
+        "allMatches" : false,
+        "expression" : "#unext:not(.unav), table.ptt td:last-child a",
+        "fallbackAttributes" : [
+
+        ],
+        "kind" : "cssExists",
+        "separator" : ",",
+        "transforms" : [
+
+        ]
+      },
+      "items" : {
+        "expression" : "tr:has(.glink)",
+        "kind" : "css"
+      },
+      "nextPageHref" : {
+        "allMatches" : false,
+        "attribute" : "href",
+        "expression" : "#unext:not(.unav)",
+        "fallbackAttributes" : [
+
+        ],
+        "kind" : "cssAttribute",
+        "separator" : ",",
+        "transforms" : [
+
+        ]
+      },
+      "request" : {
+        "body" : {
+
+        },
+        "bodyEncoding" : "none",
+        "bodyValueTypes" : {
+
+        },
+        "headers" : {
+
+        },
+        "method" : "GET",
+        "path" : "/",
+        "queryItems" : {
+          "advsearch" : "{{filter.advanced.enabled}}",
+          "f_cats" : "{{preferences.excludedCategories}}",
+          "f_sdesc" : "{{filter.search.description}}",
+          "f_sdt1" : "{{filter.search.lowPowerTags}}",
+          "f_sdt2" : "{{filter.search.downvotedTags}}",
+          "f_search" : "{{query}}",
+          "f_sfl" : "{{filter.filters.disableLanguage}}",
+          "f_sft" : "{{filter.filters.disableTag}}",
+          "f_sfu" : "{{filter.filters.disableUploader}}",
+          "f_sh" : "{{filter.search.expunged}}",
+          "f_sname" : "{{filter.search.name}}",
+          "f_sp" : "{{filter.pages.range.enabled}}",
+          "f_spf" : "{{filter.pages.from}}",
+          "f_spt" : "{{filter.pages.to}}",
+          "f_sr" : "{{filter.rating.minimum.enabled}}",
+          "f_srdd" : "{{filter.rating.minimum}}",
+          "f_stags" : "{{filter.search.tags}}",
+          "f_sto" : "{{filter.search.onlyWithTorrents}}",
+          "f_storr" : "{{filter.search.torrents}}",
+          "next" : "{{seek.next}}",
+          "page" : "{{page}}"
+        }
+      },
+      "scopeRequests" : {
+        "tag" : {
+          "body" : {
+
+          },
+          "bodyEncoding" : "none",
+          "bodyValueTypes" : {
+
+          },
+          "headers" : {
+
+          },
+          "method" : "GET",
+          "path" : "/tag/{{query}}",
+          "queryItems" : {
+            "next" : "{{seek.next}}",
+            "page" : "{{page}}"
+          }
+        },
+        "uploader" : {
+          "body" : {
+
+          },
+          "bodyEncoding" : "none",
+          "bodyValueTypes" : {
+
+          },
+          "headers" : {
+
+          },
+          "method" : "GET",
+          "path" : "/uploader/{{query}}",
+          "queryItems" : {
+            "next" : "{{seek.next}}",
+            "page" : "{{page}}"
+          }
+        }
+      },
+      "variantRequests" : {
+        "popular" : {
+          "body" : {
+
+          },
+          "bodyEncoding" : "none",
+          "bodyValueTypes" : {
+
+          },
+          "headers" : {
+
+          },
+          "method" : "GET",
+          "path" : "/popular",
+          "queryItems" : {
+            "page" : "{{page}}"
+          }
+        },
+        "top" : {
+          "body" : {
+
+          },
+          "bodyEncoding" : "none",
+          "bodyValueTypes" : {
+
+          },
+          "headers" : {
+
+          },
+          "method" : "GET",
+          "path" : "https://e-hentai.org/toplist.php",
+          "queryItems" : {
+            "p" : "{{page}}",
+            "tl" : "{{timeRange.tl}}"
+          }
+        }
+      }
+    },
+    "contextValues" : {
+      "gid" : {
+        "transforms" : [
+          {
+            "captureGroup" : 1,
+            "kind" : "regularExpressionCapture",
+            "pattern" : "/g/(\\d+)/",
+            "replacement" : ""
+          }
+        ],
+        "value" : "{{book.id}}"
+      },
+      "token" : {
+        "transforms" : [
+          {
+            "captureGroup" : 1,
+            "kind" : "regularExpressionCapture",
+            "pattern" : "/g/\\d+/([0-9a-fA-F]+)",
+            "replacement" : ""
+          }
+        ],
+        "value" : "{{book.id}}"
+      }
+    },
+    "defaultEndpointID" : "public",
+    "detail" : {
+      "book" : {
+        "authors" : {
+          "allMatches" : false,
+          "expression" : "#gdn a",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssText",
+          "separator" : ",",
+          "transforms" : [
+
+          ]
+        },
+        "authorsSeparator" : ",",
+        "coverURL" : {
+          "allMatches" : false,
+          "attribute" : "style",
+          "expression" : "#gd1 [style*='url(']",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssAttribute",
+          "separator" : ",",
+          "transforms" : [
+            {
+              "captureGroup" : 1,
+              "kind" : "regularExpressionCapture",
+              "pattern" : "(?i)url\\(([^)]+)\\)",
+              "replacement" : ""
+            },
+            {
+              "captureGroup" : 0,
+              "kind" : "literalReplacement",
+              "pattern" : "\"",
+              "replacement" : ""
+            },
+            {
+              "captureGroup" : 0,
+              "kind" : "literalReplacement",
+              "pattern" : "'",
+              "replacement" : ""
+            }
+          ]
+        },
+        "metadata" : {
+          "reader.badgeColorHex" : {
+            "allMatches" : false,
+            "expression" : "#gdc",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssText",
+            "separator" : ",",
+            "transforms" : [
+              {
+                "captureGroup" : 0,
+                "kind" : "lookupValue",
+                "pattern" : "categoryColors",
+                "replacement" : ""
+              }
+            ]
+          },
+          "reader.badgeTitle" : {
+            "allMatches" : false,
+            "expression" : "#gdc",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssText",
+            "separator" : ",",
+            "transforms" : [
+
+            ]
+          },
+          "reader.favoriteCount" : {
+            "allMatches" : false,
+            "expression" : "#favcount",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssText",
+            "separator" : ",",
+            "transforms" : [
+              {
+                "captureGroup" : 1,
+                "kind" : "regularExpressionCapture",
+                "pattern" : "([0-9,]+)",
+                "replacement" : ""
+              },
+              {
+                "captureGroup" : 0,
+                "kind" : "literalReplacement",
+                "pattern" : ",",
+                "replacement" : ""
+              }
+            ]
+          },
+          "reader.fileSize" : {
+            "allMatches" : true,
+            "expression" : "#gdd tr",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssText",
+            "separator" : " ",
+            "transforms" : [
+              {
+                "captureGroup" : 1,
+                "kind" : "regularExpressionCapture",
+                "pattern" : "File Size:\\s*([0-9.]+ ?[A-Za-z]+)",
+                "replacement" : ""
+              }
+            ]
+          },
+          "reader.isFavorite" : {
+            "allMatches" : false,
+            "expression" : "#gdf:not(:contains(Add to Favorites))",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssExists",
+            "separator" : ",",
+            "transforms" : [
+
+            ]
+          },
+          "reader.published" : {
+            "allMatches" : true,
+            "expression" : "#gdd tr",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssText",
+            "separator" : " ",
+            "transforms" : [
+              {
+                "captureGroup" : 1,
+                "kind" : "regularExpressionCapture",
+                "pattern" : "Posted:\\s*(\\d{4}-\\d{2}-\\d{2}(?:\\s+\\d{2}:\\d{2})?)",
+                "replacement" : ""
+              }
+            ]
+          },
+          "reader.rating" : {
+            "allMatches" : false,
+            "expression" : "#rating_label",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssText",
+            "separator" : ",",
+            "transforms" : [
+              {
+                "captureGroup" : 1,
+                "kind" : "regularExpressionCapture",
+                "pattern" : "([0-9]+(?:\\.[0-9]+)?)",
+                "replacement" : ""
+              }
+            ]
+          },
+          "reader.ratingCount" : {
+            "allMatches" : false,
+            "expression" : "#rating_count",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssText",
+            "separator" : ",",
+            "transforms" : [
+
+            ]
+          },
+          "reader.torrentCount" : {
+            "allMatches" : false,
+            "expression" : "a[onclick*='gallerytorrents']",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssText",
+            "separator" : ",",
+            "transforms" : [
+              {
+                "captureGroup" : 1,
+                "kind" : "regularExpressionCapture",
+                "pattern" : "\\((\\d+)\\)",
+                "replacement" : ""
+              }
+            ]
+          },
+          "tags" : {
+            "allMatches" : true,
+            "attribute" : "href",
+            "expression" : "#taglist a",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssAttribute",
+            "separator" : "\n",
+            "transforms" : [
+              {
+                "captureGroup" : 0,
+                "kind" : "literalReplacement",
+                "pattern" : "https://e-hentai.org/tag/",
+                "replacement" : ""
+              },
+              {
+                "captureGroup" : 0,
+                "kind" : "literalReplacement",
+                "pattern" : "https://exhentai.org/tag/",
+                "replacement" : ""
+              },
+              {
+                "captureGroup" : 0,
+                "kind" : "literalReplacement",
+                "pattern" : "+",
+                "replacement" : " "
+              },
+              {
+                "captureGroup" : 0,
+                "kind" : "literalReplacement",
+                "pattern" : "_",
+                "replacement" : " "
+              }
+            ]
+          }
+        },
+        "pageCount" : {
+          "allMatches" : true,
+          "expression" : "#gdd tr",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssText",
+          "separator" : " ",
+          "transforms" : [
+            {
+              "captureGroup" : 1,
+              "kind" : "regularExpressionCapture",
+              "pattern" : "(?i)([\\d,]+)\\s+pages?",
+              "replacement" : ""
+            },
+            {
+              "captureGroup" : 0,
+              "kind" : "literalReplacement",
+              "pattern" : ",",
+              "replacement" : ""
+            }
+          ]
+        },
+        "subtitle" : {
+          "allMatches" : false,
+          "expression" : "#gj",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssText",
+          "separator" : ",",
+          "transforms" : [
+
+          ]
+        },
+        "title" : {
+          "allMatches" : false,
+          "expression" : "#gn",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssText",
+          "separator" : ",",
+          "transforms" : [
+
+          ]
+        }
+      },
+      "format" : "html",
+      "request" : {
+        "body" : {
+
+        },
+        "bodyEncoding" : "none",
+        "bodyValueTypes" : {
+
+        },
+        "headers" : {
+
+        },
+        "method" : "GET",
+        "path" : "{{book.id}}",
+        "queryItems" : {
+
+        }
+      }
+    },
+    "endpoints" : [
+      {
+        "baseURL" : "https://e-hentai.org/",
+        "id" : "public",
+        "subtitle" : "Standard gallery access",
+        "title" : "E-Hentai"
+      },
+      {
+        "baseURL" : "https://exhentai.org/",
+        "id" : "extended",
+        "subtitle" : "Extended gallery access\nRequires authentication",
+        "title" : "ExHentai",
+        "validation" : {
+          "request" : {
+            "body" : {
+
+            },
+            "bodyEncoding" : "none",
+            "bodyValueTypes" : {
+
+            },
+            "headers" : {
+
+            },
+            "method" : "GET",
+            "path" : "/",
+            "queryItems" : {
+
+            }
+          },
+          "response" : {
+            "format" : "html",
+            "success" : {
+              "allMatches" : false,
+              "expression" : "body:not(:empty)",
+              "fallbackAttributes" : [
+
+              ],
+              "kind" : "cssExists",
+              "separator" : ",",
+              "transforms" : [
+
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "favorites" : {
+      "book" : {
+        "authors" : {
+          "allMatches" : false,
+          "expression" : "a[href*='/uploader/']",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssText",
+          "separator" : ",",
+          "transforms" : [
+
+          ]
+        },
+        "authorsSeparator" : ",",
+        "coverURL" : {
+          "allMatches" : false,
+          "attribute" : "data-src",
+          "expression" : "img",
+          "fallbackAttributes" : [
+            "src",
+            "srcset"
+          ],
+          "kind" : "cssAttribute",
+          "separator" : ",",
+          "transforms" : [
+            {
+              "captureGroup" : 1,
+              "kind" : "regularExpressionCapture",
+              "pattern" : "^(\\S+)",
+              "replacement" : ""
+            }
+          ]
+        },
+        "id" : {
+          "allMatches" : false,
+          "attribute" : "href",
+          "expression" : "a[href*='/g/']",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssAttribute",
+          "separator" : ",",
+          "transforms" : [
+            {
+              "captureGroup" : 1,
+              "kind" : "regularExpressionCapture",
+              "pattern" : "(?i)(/g/[0-9]+/[^/?#]+/?)",
+              "replacement" : ""
+            }
+          ]
+        },
+        "metadata" : {
+          "reader.badgeColorHex" : {
+            "allMatches" : false,
+            "expression" : ".cn, .cs, .glcat",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssText",
+            "separator" : ",",
+            "transforms" : [
+              {
+                "captureGroup" : 0,
+                "kind" : "lookupValue",
+                "pattern" : "categoryColors",
+                "replacement" : ""
+              }
+            ]
+          },
+          "reader.badgeTitle" : {
+            "allMatches" : false,
+            "expression" : ".cn, .cs, .glcat",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssText",
+            "separator" : ",",
+            "transforms" : [
+
+            ]
+          },
+          "reader.language" : {
+            "allMatches" : true,
+            "attribute" : "title",
+            "expression" : ".gt",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssAttribute",
+            "separator" : "\n",
+            "transforms" : [
+              {
+                "captureGroup" : 1,
+                "kind" : "regularExpressionCapture",
+                "pattern" : "(?i)language:([a-z ]+)",
+                "replacement" : ""
+              }
+            ]
+          },
+          "reader.published" : {
+            "allMatches" : false,
+            "expression" : "[id^='posted_']",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssText",
+            "separator" : ",",
+            "transforms" : [
+
+            ]
+          },
+          "reader.rating" : {
+            "allMatches" : false,
+            "attribute" : "style",
+            "expression" : ".ir",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssAttribute",
+            "separator" : ",",
+            "transforms" : [
+              {
+                "captureGroup" : 0,
+                "kind" : "backgroundPositionRating",
+                "pattern" : "",
+                "replacement" : ""
+              }
+            ]
+          },
+          "tags" : {
+            "allMatches" : true,
+            "attribute" : "title",
+            "expression" : ".gt",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssAttribute",
+            "separator" : "\n",
+            "transforms" : [
+
+            ]
+          }
+        },
+        "pageCount" : {
+          "allMatches" : true,
+          "expression" : ".glthumb, .glhide, .gl3e, .gl5t",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssText",
+          "separator" : " ",
+          "transforms" : [
+            {
+              "captureGroup" : 1,
+              "kind" : "regularExpressionCapture",
+              "pattern" : "(?i)([\\d,]+)\\s+pages?",
+              "replacement" : ""
+            },
+            {
+              "captureGroup" : 0,
+              "kind" : "literalReplacement",
+              "pattern" : ",",
+              "replacement" : ""
+            }
+          ]
+        },
+        "title" : {
+          "allMatches" : false,
+          "expression" : ".glink",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssText",
+          "separator" : ",",
+          "transforms" : [
+
+          ]
+        }
+      },
+      "format" : "html",
+      "hasMore" : {
+        "allMatches" : false,
+        "expression" : "#unext:not(.unav), table.ptt td:last-child a",
+        "fallbackAttributes" : [
+
+        ],
+        "kind" : "cssExists",
+        "separator" : ",",
+        "transforms" : [
+
+        ]
+      },
+      "items" : {
+        "expression" : "tr:has(.glink)",
+        "kind" : "css"
+      },
+      "nextPageHref" : {
+        "allMatches" : false,
+        "attribute" : "href",
+        "expression" : "#unext:not(.unav)",
+        "fallbackAttributes" : [
+
+        ],
+        "kind" : "cssAttribute",
+        "separator" : ",",
+        "transforms" : [
+
+        ]
+      },
+      "request" : {
+        "body" : {
+
+        },
+        "bodyEncoding" : "none",
+        "bodyValueTypes" : {
+
+        },
+        "headers" : {
+
+        },
+        "method" : "GET",
+        "path" : "/favorites.php",
+        "queryItems" : {
+          "f_search" : "{{query}}",
+          "favcat" : "{{category}}",
+          "page" : "{{page}}",
+          "seek" : "{{seek.date}}"
+        }
+      }
+    },
+    "favoritesCategories" : {
+      "category" : {
+        "allMatches" : false,
+        "attribute" : "onclick",
+        "expression" : "",
+        "fallbackAttributes" : [
+
+        ],
+        "kind" : "cssAttribute",
+        "separator" : ",",
+        "transforms" : [
+          {
+            "captureGroup" : 1,
+            "kind" : "regularExpressionCapture",
+            "pattern" : "favcat=(\\d+)",
+            "replacement" : ""
+          }
+        ]
+      },
+      "count" : {
+        "allMatches" : false,
+        "expression" : "div:eq(0)",
+        "fallbackAttributes" : [
+
+        ],
+        "kind" : "cssText",
+        "separator" : ",",
+        "transforms" : [
+          {
+            "captureGroup" : 1,
+            "kind" : "regularExpressionCapture",
+            "pattern" : "([\\d,]+)",
+            "replacement" : ""
+          }
+        ]
+      },
+      "format" : "html",
+      "items" : {
+        "expression" : "div.fp",
+        "kind" : "css"
+      },
+      "name" : {
+        "allMatches" : false,
+        "attribute" : "title",
+        "expression" : ".i",
+        "fallbackAttributes" : [
+
+        ],
+        "kind" : "cssAttribute",
+        "separator" : ",",
+        "transforms" : [
+
+        ]
+      },
+      "request" : {
+        "body" : {
+
+        },
+        "bodyEncoding" : "none",
+        "bodyValueTypes" : {
+
+        },
+        "headers" : {
+
+        },
+        "method" : "GET",
+        "path" : "/favorites.php",
+        "queryItems" : {
+
+        }
+      }
+    },
+    "headers" : {
+      "Accept" : "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+      "Accept-Language" : "zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7",
+      "User-Agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36"
+    },
+    "imageSearch" : {
+      "book" : {
+        "authors" : {
+          "allMatches" : false,
+          "expression" : "a[href*='/uploader/']",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssText",
+          "separator" : ",",
+          "transforms" : [
+
+          ]
+        },
+        "authorsSeparator" : ",",
+        "coverURL" : {
+          "allMatches" : false,
+          "attribute" : "data-src",
+          "expression" : "img",
+          "fallbackAttributes" : [
+            "src",
+            "srcset"
+          ],
+          "kind" : "cssAttribute",
+          "separator" : ",",
+          "transforms" : [
+            {
+              "captureGroup" : 1,
+              "kind" : "regularExpressionCapture",
+              "pattern" : "^(\\S+)",
+              "replacement" : ""
+            }
+          ]
+        },
+        "id" : {
+          "allMatches" : false,
+          "attribute" : "href",
+          "expression" : "a[href*='/g/']",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssAttribute",
+          "separator" : ",",
+          "transforms" : [
+            {
+              "captureGroup" : 1,
+              "kind" : "regularExpressionCapture",
+              "pattern" : "(?i)(/g/[0-9]+/[^/?#]+/?)",
+              "replacement" : ""
+            }
+          ]
+        },
+        "metadata" : {
+          "reader.badgeColorHex" : {
+            "allMatches" : false,
+            "expression" : ".cn, .cs, .glcat",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssText",
+            "separator" : ",",
+            "transforms" : [
+              {
+                "captureGroup" : 0,
+                "kind" : "lookupValue",
+                "pattern" : "categoryColors",
+                "replacement" : ""
+              }
+            ]
+          },
+          "reader.badgeTitle" : {
+            "allMatches" : false,
+            "expression" : ".cn, .cs, .glcat",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssText",
+            "separator" : ",",
+            "transforms" : [
+
+            ]
+          },
+          "reader.language" : {
+            "allMatches" : true,
+            "attribute" : "title",
+            "expression" : ".gt",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssAttribute",
+            "separator" : "\n",
+            "transforms" : [
+              {
+                "captureGroup" : 1,
+                "kind" : "regularExpressionCapture",
+                "pattern" : "(?i)language:([a-z ]+)",
+                "replacement" : ""
+              }
+            ]
+          },
+          "reader.published" : {
+            "allMatches" : false,
+            "expression" : "[id^='posted_']",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssText",
+            "separator" : ",",
+            "transforms" : [
+
+            ]
+          },
+          "reader.rating" : {
+            "allMatches" : false,
+            "attribute" : "style",
+            "expression" : ".ir",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssAttribute",
+            "separator" : ",",
+            "transforms" : [
+              {
+                "captureGroup" : 0,
+                "kind" : "backgroundPositionRating",
+                "pattern" : "",
+                "replacement" : ""
+              }
+            ]
+          },
+          "tags" : {
+            "allMatches" : true,
+            "attribute" : "title",
+            "expression" : ".gt",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssAttribute",
+            "separator" : "\n",
+            "transforms" : [
+
+            ]
+          }
+        },
+        "pageCount" : {
+          "allMatches" : true,
+          "expression" : ".glthumb, .glhide, .gl3e, .gl5t",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssText",
+          "separator" : " ",
+          "transforms" : [
+            {
+              "captureGroup" : 1,
+              "kind" : "regularExpressionCapture",
+              "pattern" : "(?i)([\\d,]+)\\s+pages?",
+              "replacement" : ""
+            },
+            {
+              "captureGroup" : 0,
+              "kind" : "literalReplacement",
+              "pattern" : ",",
+              "replacement" : ""
+            }
+          ]
+        },
+        "title" : {
+          "allMatches" : false,
+          "expression" : ".glink",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssText",
+          "separator" : ",",
+          "transforms" : [
+
+          ]
+        }
+      },
+      "fields" : {
+        "f_sfile" : "File Search",
+        "fs_covers" : "{{action.covers}}",
+        "fs_exp" : "{{action.expunged}}",
+        "fs_similar" : "{{action.similar}}"
+      },
+      "fileField" : "sfile",
+      "format" : "html",
+      "items" : {
+        "expression" : "tr:has(.glink)",
+        "kind" : "css"
+      },
+      "request" : {
+        "body" : {
+
+        },
+        "bodyEncoding" : "none",
+        "bodyValueTypes" : {
+
+        },
+        "headers" : {
+          "Origin" : "https://e-hentai.org",
+          "Referer" : "https://e-hentai.org/"
+        },
+        "method" : "POST",
+        "path" : "https://upld.e-hentai.org/image_lookup.php",
+        "queryItems" : {
+
+        }
+      }
+    },
+    "linkPatterns" : [
+      {
+        "bookID" : "/g/{{match.1}}/{{match.2}}/",
+        "pattern" : "(?:https?://(?:e-hentai\\.org|exhentai\\.org|lofi\\.e-hentai\\.org))?/(?:g|mpv)/(\\d+)/([0-9a-fA-F]{10})/?",
+        "scope" : "all"
+      },
+      {
+        "pattern" : "(?:https?://(?:e-hentai\\.org|exhentai\\.org))?/uploader/([^/?#]+)",
+        "query" : "{{match.1}}",
+        "scope" : "uploader"
+      },
+      {
+        "pattern" : "(?:https?://(?:e-hentai\\.org|exhentai\\.org))?/tag/([^/?#]+)",
+        "query" : "{{match.1}}",
+        "scope" : "tag"
+      },
+      {
+        "pattern" : "(?:https?://(?:e-hentai\\.org|exhentai\\.org))?/\\?(?:[^#]*&)?f_search=([^&]+)",
+        "query" : "{{match.1}}",
+        "scope" : "all"
+      }
+    ],
+    "pageResolution" : {
+      "format" : "html",
+      "request" : {
+        "body" : {
+
+        },
+        "bodyEncoding" : "none",
+        "bodyValueTypes" : {
+
+        },
+        "headers" : {
+          "Referer" : "{{page.reader.responseURL}}"
+        },
+        "method" : "GET",
+        "path" : "{{page.pageURL}}",
+        "queryItems" : {
+
+        }
+      },
+      "resource" : {
+        "displayURL" : {
+          "allMatches" : false,
+          "attribute" : "src",
+          "expression" : "#img",
+          "fallbackAttributes" : [
+            "data-src"
+          ],
+          "kind" : "cssAttribute",
+          "separator" : ",",
+          "transforms" : [
+
+          ]
+        },
+        "metadata" : {
+
+        },
+        "originalURL" : {
+          "allMatches" : false,
+          "attribute" : "href",
+          "expression" : "a[href*='fullimg']",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssAttribute",
+          "separator" : ",",
+          "transforms" : [
+
+          ]
+        }
+      }
+    },
+    "pages" : {
+      "batchRequest" : {
+        "body" : {
+
+        },
+        "bodyEncoding" : "none",
+        "bodyValueTypes" : {
+
+        },
+        "headers" : {
+
+        },
+        "method" : "GET",
+        "path" : "{{book.id}}",
+        "queryItems" : {
+          "p" : "{{batch}}"
+        }
+      },
+      "format" : "html",
+      "items" : {
+        "expression" : "#gdt a[href*='/s/']",
+        "kind" : "css"
+      },
+      "page" : {
+        "indexOffset" : 0,
+        "metadata" : {
+          "pageURL" : {
+            "allMatches" : false,
+            "attribute" : "href",
+            "expression" : "",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssAttribute",
+            "separator" : ",",
+            "transforms" : [
+              {
+                "captureGroup" : 1,
+                "kind" : "regularExpressionCapture",
+                "pattern" : "(?i)(/s/[0-9a-f]+/[0-9]+-[0-9]+)",
+                "replacement" : ""
+              }
+            ]
+          }
+        },
+        "previewCropHeight" : {
+          "allMatches" : false,
+          "attribute" : "style",
+          "expression" : "div[style*='url(']",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssAttribute",
+          "separator" : ",",
+          "transforms" : [
+            {
+              "captureGroup" : 1,
+              "kind" : "regularExpressionCapture",
+              "pattern" : "height:(\\d+)px",
+              "replacement" : ""
+            }
+          ]
+        },
+        "previewCropWidth" : {
+          "allMatches" : false,
+          "attribute" : "style",
+          "expression" : "div[style*='url(']",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssAttribute",
+          "separator" : ",",
+          "transforms" : [
+            {
+              "captureGroup" : 1,
+              "kind" : "regularExpressionCapture",
+              "pattern" : "width:(\\d+)px",
+              "replacement" : ""
+            }
+          ]
+        },
+        "previewCropX" : {
+          "allMatches" : false,
+          "attribute" : "style",
+          "expression" : "div[style*='url(']",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssAttribute",
+          "separator" : ",",
+          "transforms" : [
+            {
+              "captureGroup" : 1,
+              "kind" : "regularExpressionCapture",
+              "pattern" : "url\\([^)]+\\)\\s*(-?\\d+)px",
+              "replacement" : ""
+            },
+            {
+              "captureGroup" : 0,
+              "kind" : "literalReplacement",
+              "pattern" : "-",
+              "replacement" : ""
+            }
+          ]
+        },
+        "previewCropY" : {
+          "allMatches" : false,
+          "attribute" : "style",
+          "expression" : "div[style*='url(']",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssAttribute",
+          "separator" : ",",
+          "transforms" : [
+            {
+              "captureGroup" : 1,
+              "kind" : "regularExpressionCapture",
+              "pattern" : "url\\([^)]+\\)\\s*-?\\d+px\\s+(-?\\d+)px",
+              "replacement" : ""
+            },
+            {
+              "captureGroup" : 0,
+              "kind" : "literalReplacement",
+              "pattern" : "-",
+              "replacement" : ""
+            }
+          ]
+        },
+        "previewURL" : {
+          "allMatches" : false,
+          "attribute" : "style",
+          "expression" : "div[style*='url(']",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssAttribute",
+          "separator" : ",",
+          "transforms" : [
+            {
+              "captureGroup" : 1,
+              "kind" : "regularExpressionCapture",
+              "pattern" : "url\\(([^)]+)\\)",
+              "replacement" : ""
+            }
+          ]
+        }
+      },
+      "request" : {
+        "body" : {
+
+        },
+        "bodyEncoding" : "none",
+        "bodyValueTypes" : {
+
+        },
+        "headers" : {
+
+        },
+        "method" : "GET",
+        "path" : "{{book.id}}",
+        "queryItems" : {
+
+        }
+      },
+      "totalCount" : {
+        "allMatches" : false,
+        "expression" : ".gpc",
+        "fallbackAttributes" : [
+
+        ],
+        "kind" : "cssText",
+        "separator" : ",",
+        "transforms" : [
+          {
+            "captureGroup" : 1,
+            "kind" : "regularExpressionCapture",
+            "pattern" : "of ([\\d,]+)",
+            "replacement" : ""
+          },
+          {
+            "captureGroup" : 0,
+            "kind" : "literalReplacement",
+            "pattern" : ",",
+            "replacement" : ""
+          }
+        ]
+      }
+    },
+    "profile" : {
+      "actions" : [
+        {
+          "id" : "ehxr.profile.resetImageLimit",
+          "request" : {
+            "body" : {
+              "reset_imagelimit" : "Reset Limit"
+            },
+            "bodyEncoding" : "form",
+            "bodyValueTypes" : {
+
+            },
+            "headers" : {
+              "Referer" : "https://e-hentai.org/home.php"
+            },
+            "method" : "POST",
+            "path" : "https://e-hentai.org/home.php",
+            "queryItems" : {
+
+            }
+          },
+          "systemImageName" : "arrow.counterclockwise",
+          "title" : "Reset Limit"
+        }
+      ],
+      "format" : "html",
+      "request" : {
+        "body" : {
+
+        },
+        "bodyEncoding" : "none",
+        "bodyValueTypes" : {
+
+        },
+        "headers" : {
+
+        },
+        "method" : "GET",
+        "path" : "https://e-hentai.org/home.php",
+        "queryItems" : {
+
+        }
+      },
+      "sections" : [
+        {
+          "actionIDs" : [
+
+          ],
+          "fields" : [
+            {
+              "id" : "name",
+              "title" : "Name",
+              "value" : {
+                "allMatches" : false,
+                "expression" : "#userlinks a, #profilename a, #profilename",
+                "fallbackAttributes" : [
+
+                ],
+                "kind" : "cssText",
+                "separator" : ",",
+                "transforms" : [
+
+                ]
+              }
+            },
+            {
+              "id" : "memberSince",
+              "title" : "Member Since",
+              "value" : {
+                "allMatches" : false,
+                "expression" : ".stats p:contains(Member Since)",
+                "fallbackAttributes" : [
+
+                ],
+                "kind" : "cssText",
+                "separator" : ",",
+                "transforms" : [
+                  {
+                    "captureGroup" : 1,
+                    "kind" : "regularExpressionCapture",
+                    "pattern" : "Member Since\\s*(.+)",
+                    "replacement" : ""
+                  }
+                ]
+              }
+            }
+          ],
+          "id" : "profile",
+          "title" : "Profile"
+        },
+        {
+          "actionIDs" : [
+
+          ],
+          "fields" : [
+            {
+              "id" : "galleries",
+              "title" : "Galleries",
+              "value" : {
+                "allMatches" : false,
+                "expression" : ".stats p:contains(Gallery Submissions), .stats div:contains(Gallery Submissions)",
+                "fallbackAttributes" : [
+
+                ],
+                "kind" : "cssText",
+                "separator" : ",",
+                "transforms" : [
+                  {
+                    "captureGroup" : 1,
+                    "kind" : "regularExpressionCapture",
+                    "pattern" : "([\\d,]+)",
+                    "replacement" : ""
+                  },
+                  {
+                    "captureGroup" : 0,
+                    "kind" : "literalReplacement",
+                    "pattern" : ",",
+                    "replacement" : ""
+                  }
+                ]
+              }
+            },
+            {
+              "id" : "favorites",
+              "title" : "Favorites",
+              "value" : {
+                "allMatches" : false,
+                "expression" : ".stats p:contains(Favorites), .stats div:contains(Favorites)",
+                "fallbackAttributes" : [
+
+                ],
+                "kind" : "cssText",
+                "separator" : ",",
+                "transforms" : [
+                  {
+                    "captureGroup" : 1,
+                    "kind" : "regularExpressionCapture",
+                    "pattern" : "([\\d,]+)",
+                    "replacement" : ""
+                  },
+                  {
+                    "captureGroup" : 0,
+                    "kind" : "literalReplacement",
+                    "pattern" : ",",
+                    "replacement" : ""
+                  }
+                ]
+              }
+            },
+            {
+              "id" : "forumPosts",
+              "title" : "Forum Posts",
+              "value" : {
+                "allMatches" : false,
+                "expression" : ".stats p:contains(Forum Posts), .stats div:contains(Forum Posts)",
+                "fallbackAttributes" : [
+
+                ],
+                "kind" : "cssText",
+                "separator" : ",",
+                "transforms" : [
+                  {
+                    "captureGroup" : 1,
+                    "kind" : "regularExpressionCapture",
+                    "pattern" : "([\\d,]+)",
+                    "replacement" : ""
+                  },
+                  {
+                    "captureGroup" : 0,
+                    "kind" : "literalReplacement",
+                    "pattern" : ",",
+                    "replacement" : ""
+                  }
+                ]
+              }
+            }
+          ],
+          "id" : "stats",
+          "title" : "Stats"
+        },
+        {
+          "actionIDs" : [
+            "ehxr.profile.resetImageLimit"
+          ],
+          "fields" : [
+            {
+              "id" : "resetCost",
+              "suffix" : " GP",
+              "title" : "Reset Cost",
+              "value" : {
+                "allMatches" : true,
+                "expression" : "body",
+                "fallbackAttributes" : [
+
+                ],
+                "kind" : "cssHTML",
+                "separator" : "\n",
+                "transforms" : [
+                  {
+                    "captureGroup" : 1,
+                    "kind" : "regularExpressionCapture",
+                    "pattern" : "<strong>([\\d,]+)</strong> GP",
+                    "replacement" : ""
+                  },
+                  {
+                    "captureGroup" : 0,
+                    "kind" : "literalReplacement",
+                    "pattern" : ",",
+                    "replacement" : ""
+                  }
+                ]
+              }
+            }
+          ],
+          "id" : "limits",
+          "title" : "Limits",
+          "usage" : {
+            "current" : {
+              "allMatches" : false,
+              "expression" : ".stats p:contains(Image Limit)",
+              "fallbackAttributes" : [
+
+              ],
+              "kind" : "cssText",
+              "separator" : ",",
+              "transforms" : [
+                {
+                  "captureGroup" : 1,
+                  "kind" : "regularExpressionCapture",
+                  "pattern" : "([\\d,]+)\\D+([\\d,]+)",
+                  "replacement" : ""
+                },
+                {
+                  "captureGroup" : 0,
+                  "kind" : "literalReplacement",
+                  "pattern" : ",",
+                  "replacement" : ""
+                }
+              ]
+            },
+            "limit" : {
+              "allMatches" : false,
+              "expression" : ".stats p:contains(Image Limit)",
+              "fallbackAttributes" : [
+
+              ],
+              "kind" : "cssText",
+              "separator" : ",",
+              "transforms" : [
+                {
+                  "captureGroup" : 2,
+                  "kind" : "regularExpressionCapture",
+                  "pattern" : "([\\d,]+)\\D+([\\d,]+)",
+                  "replacement" : ""
+                },
+                {
+                  "captureGroup" : 0,
+                  "kind" : "literalReplacement",
+                  "pattern" : ",",
+                  "replacement" : ""
+                }
+              ]
+            },
+            "title" : "Image Views"
+          }
+        },
+        {
+          "actionIDs" : [
+
+          ],
+          "fields" : [
+            {
+              "id" : "galleryVisits",
+              "suffix" : " GP",
+              "title" : "Gallery Visits",
+              "value" : {
+                "allMatches" : false,
+                "expression" : ".homebox:eq(2)",
+                "fallbackAttributes" : [
+
+                ],
+                "kind" : "cssText",
+                "separator" : ",",
+                "transforms" : [
+                  {
+                    "captureGroup" : 1,
+                    "kind" : "regularExpressionCapture",
+                    "pattern" : "([\\d,]+)\\D+([\\d,]+)\\D+([\\d,]+)\\D+([\\d,]+)",
+                    "replacement" : ""
+                  },
+                  {
+                    "captureGroup" : 0,
+                    "kind" : "literalReplacement",
+                    "pattern" : ",",
+                    "replacement" : ""
+                  }
+                ]
+              }
+            },
+            {
+              "id" : "torrentCompletions",
+              "suffix" : " GP",
+              "title" : "Torrent Completions",
+              "value" : {
+                "allMatches" : false,
+                "expression" : ".homebox:eq(2)",
+                "fallbackAttributes" : [
+
+                ],
+                "kind" : "cssText",
+                "separator" : ",",
+                "transforms" : [
+                  {
+                    "captureGroup" : 2,
+                    "kind" : "regularExpressionCapture",
+                    "pattern" : "([\\d,]+)\\D+([\\d,]+)\\D+([\\d,]+)\\D+([\\d,]+)",
+                    "replacement" : ""
+                  },
+                  {
+                    "captureGroup" : 0,
+                    "kind" : "literalReplacement",
+                    "pattern" : ",",
+                    "replacement" : ""
+                  }
+                ]
+              }
+            },
+            {
+              "id" : "archiveDownloads",
+              "suffix" : " GP",
+              "title" : "Archive Downloads",
+              "value" : {
+                "allMatches" : false,
+                "expression" : ".homebox:eq(2)",
+                "fallbackAttributes" : [
+
+                ],
+                "kind" : "cssText",
+                "separator" : ",",
+                "transforms" : [
+                  {
+                    "captureGroup" : 3,
+                    "kind" : "regularExpressionCapture",
+                    "pattern" : "([\\d,]+)\\D+([\\d,]+)\\D+([\\d,]+)\\D+([\\d,]+)",
+                    "replacement" : ""
+                  },
+                  {
+                    "captureGroup" : 0,
+                    "kind" : "literalReplacement",
+                    "pattern" : ",",
+                    "replacement" : ""
+                  }
+                ]
+              }
+            },
+            {
+              "id" : "hath",
+              "suffix" : " GP",
+              "title" : "H@H",
+              "value" : {
+                "allMatches" : false,
+                "expression" : ".homebox:eq(2)",
+                "fallbackAttributes" : [
+
+                ],
+                "kind" : "cssText",
+                "separator" : ",",
+                "transforms" : [
+                  {
+                    "captureGroup" : 4,
+                    "kind" : "regularExpressionCapture",
+                    "pattern" : "([\\d,]+)\\D+([\\d,]+)\\D+([\\d,]+)\\D+([\\d,]+)",
+                    "replacement" : ""
+                  },
+                  {
+                    "captureGroup" : 0,
+                    "kind" : "literalReplacement",
+                    "pattern" : ",",
+                    "replacement" : ""
+                  }
+                ]
+              }
+            }
+          ],
+          "id" : "gpGained",
+          "title" : "GP Gained"
+        },
+        {
+          "actionIDs" : [
+
+          ],
+          "fields" : [
+            {
+              "id" : "power",
+              "title" : "Power",
+              "value" : {
+                "allMatches" : false,
+                "expression" : ".homebox:eq(4)",
+                "fallbackAttributes" : [
+
+                ],
+                "kind" : "cssText",
+                "separator" : ",",
+                "transforms" : [
+                  {
+                    "captureGroup" : 1,
+                    "kind" : "regularExpressionCapture",
+                    "pattern" : "([\\d,]+)",
+                    "replacement" : ""
+                  },
+                  {
+                    "captureGroup" : 0,
+                    "kind" : "literalReplacement",
+                    "pattern" : ",",
+                    "replacement" : ""
+                  }
+                ]
+              }
+            }
+          ],
+          "id" : "moderation",
+          "title" : "Moderation"
+        }
+      ]
+    },
+    "remoteResources" : {
+      "headers" : {
+        "Accept" : "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+        "Referer" : "{{resource.reader.responseURL}}"
+      }
+    },
+    "searchFilters" : {
+      "advancedOnlyFieldIDs" : [
+        "rating.minimum.enabled",
+        "pages.range.enabled",
+        "pages.to"
+      ],
+      "descriptor" : {
+        "advancedToggleID" : "advanced.enabled",
+        "advancedToggleTitle" : "Advanced Search Options",
+        "groups" : [
+          {
+            "columns" : 2,
+            "fields" : [
+              {
+                "bitValue" : 2,
+                "choices" : [
+
+                ],
+                "colorHex" : "#AF52DE",
+                "control" : "optionToggle",
+                "defaultSecondaryValue" : "",
+                "defaultValue" : "true",
+                "id" : "category.2",
+                "placeholder" : "",
+                "secondaryPlaceholder" : "",
+                "title" : "Doujinshi"
+              },
+              {
+                "bitValue" : 4,
+                "choices" : [
+
+                ],
+                "colorHex" : "#FF9500",
+                "control" : "optionToggle",
+                "defaultSecondaryValue" : "",
+                "defaultValue" : "true",
+                "id" : "category.4",
+                "placeholder" : "",
+                "secondaryPlaceholder" : "",
+                "title" : "Manga"
+              },
+              {
+                "bitValue" : 8,
+                "choices" : [
+
+                ],
+                "colorHex" : "#007AFF",
+                "control" : "optionToggle",
+                "defaultSecondaryValue" : "",
+                "defaultValue" : "true",
+                "id" : "category.8",
+                "placeholder" : "",
+                "secondaryPlaceholder" : "",
+                "title" : "Artist CG"
+              },
+              {
+                "bitValue" : 16,
+                "choices" : [
+
+                ],
+                "colorHex" : "#34C759",
+                "control" : "optionToggle",
+                "defaultSecondaryValue" : "",
+                "defaultValue" : "true",
+                "id" : "category.16",
+                "placeholder" : "",
+                "secondaryPlaceholder" : "",
+                "title" : "Game CG"
+              },
+              {
+                "bitValue" : 512,
+                "choices" : [
+
+                ],
+                "colorHex" : "#32ADE6",
+                "control" : "optionToggle",
+                "defaultSecondaryValue" : "",
+                "defaultValue" : "true",
+                "id" : "category.512",
+                "placeholder" : "",
+                "secondaryPlaceholder" : "",
+                "title" : "Western"
+              },
+              {
+                "bitValue" : 256,
+                "choices" : [
+
+                ],
+                "colorHex" : "#8E8E93",
+                "control" : "optionToggle",
+                "defaultSecondaryValue" : "",
+                "defaultValue" : "true",
+                "id" : "category.256",
+                "placeholder" : "",
+                "secondaryPlaceholder" : "",
+                "title" : "Non-H"
+              },
+              {
+                "bitValue" : 32,
+                "choices" : [
+
+                ],
+                "colorHex" : "#FFCC00",
+                "control" : "optionToggle",
+                "defaultSecondaryValue" : "",
+                "defaultValue" : "true",
+                "id" : "category.32",
+                "placeholder" : "",
+                "secondaryPlaceholder" : "",
+                "title" : "Image Set"
+              },
+              {
+                "bitValue" : 64,
+                "choices" : [
+
+                ],
+                "colorHex" : "#FF2D55",
+                "control" : "optionToggle",
+                "defaultSecondaryValue" : "",
+                "defaultValue" : "true",
+                "id" : "category.64",
+                "placeholder" : "",
+                "secondaryPlaceholder" : "",
+                "title" : "Cosplay"
+              },
+              {
+                "bitValue" : 128,
+                "choices" : [
+
+                ],
+                "colorHex" : "#FF3B30",
+                "control" : "optionToggle",
+                "defaultSecondaryValue" : "",
+                "defaultValue" : "true",
+                "id" : "category.128",
+                "placeholder" : "",
+                "secondaryPlaceholder" : "",
+                "title" : "Asian Porn"
+              },
+              {
+                "bitValue" : 1,
+                "choices" : [
+
+                ],
+                "colorHex" : "#00C7BE",
+                "control" : "optionToggle",
+                "defaultSecondaryValue" : "",
+                "defaultValue" : "true",
+                "id" : "category.1",
+                "placeholder" : "",
+                "secondaryPlaceholder" : "",
+                "title" : "Misc"
+              }
+            ],
+            "id" : "categories",
+            "isAdvanced" : false,
+            "title" : "Categories"
+          },
+          {
+            "columns" : 1,
+            "fields" : [
+              {
+                "choices" : [
+
+                ],
+                "control" : "toggle",
+                "defaultSecondaryValue" : "",
+                "defaultValue" : "true",
+                "id" : "search.name",
+                "placeholder" : "",
+                "secondaryPlaceholder" : "",
+                "title" : "Search gallery names"
+              },
+              {
+                "choices" : [
+
+                ],
+                "control" : "toggle",
+                "defaultSecondaryValue" : "",
+                "defaultValue" : "true",
+                "id" : "search.tags",
+                "placeholder" : "",
+                "secondaryPlaceholder" : "",
+                "title" : "Search gallery tags"
+              },
+              {
+                "choices" : [
+
+                ],
+                "control" : "toggle",
+                "defaultSecondaryValue" : "",
+                "defaultValue" : "false",
+                "id" : "search.description",
+                "placeholder" : "",
+                "secondaryPlaceholder" : "",
+                "title" : "Search gallery descriptions"
+              },
+              {
+                "choices" : [
+
+                ],
+                "control" : "toggle",
+                "defaultSecondaryValue" : "",
+                "defaultValue" : "false",
+                "id" : "search.torrents",
+                "placeholder" : "",
+                "secondaryPlaceholder" : "",
+                "title" : "Search torrent filenames"
+              },
+              {
+                "choices" : [
+
+                ],
+                "control" : "toggle",
+                "defaultSecondaryValue" : "",
+                "defaultValue" : "false",
+                "id" : "search.onlyWithTorrents",
+                "placeholder" : "",
+                "secondaryPlaceholder" : "",
+                "title" : "Only show galleries with torrents"
+              },
+              {
+                "choices" : [
+
+                ],
+                "control" : "toggle",
+                "defaultSecondaryValue" : "",
+                "defaultValue" : "false",
+                "id" : "search.lowPowerTags",
+                "placeholder" : "",
+                "secondaryPlaceholder" : "",
+                "title" : "Search low-power tags"
+              },
+              {
+                "choices" : [
+
+                ],
+                "control" : "toggle",
+                "defaultSecondaryValue" : "",
+                "defaultValue" : "false",
+                "id" : "search.downvotedTags",
+                "placeholder" : "",
+                "secondaryPlaceholder" : "",
+                "title" : "Search downvoted tags"
+              },
+              {
+                "choices" : [
+
+                ],
+                "control" : "toggle",
+                "defaultSecondaryValue" : "",
+                "defaultValue" : "false",
+                "id" : "search.expunged",
+                "placeholder" : "",
+                "secondaryPlaceholder" : "",
+                "title" : "Search expunged galleries"
+              }
+            ],
+            "id" : "search-targets",
+            "isAdvanced" : true,
+            "title" : "Search Targets"
+          },
+          {
+            "columns" : 1,
+            "fields" : [
+              {
+                "choices" : [
+
+                ],
+                "control" : "toggle",
+                "defaultSecondaryValue" : "",
+                "defaultValue" : "false",
+                "id" : "filters.disableLanguage",
+                "placeholder" : "",
+                "secondaryPlaceholder" : "",
+                "title" : "Disable language filter"
+              },
+              {
+                "choices" : [
+
+                ],
+                "control" : "toggle",
+                "defaultSecondaryValue" : "",
+                "defaultValue" : "false",
+                "id" : "filters.disableUploader",
+                "placeholder" : "",
+                "secondaryPlaceholder" : "",
+                "title" : "Disable uploader filter"
+              },
+              {
+                "choices" : [
+
+                ],
+                "control" : "toggle",
+                "defaultSecondaryValue" : "",
+                "defaultValue" : "false",
+                "id" : "filters.disableTag",
+                "placeholder" : "",
+                "secondaryPlaceholder" : "",
+                "title" : "Disable tag filter"
+              }
+            ],
+            "id" : "default-filters",
+            "isAdvanced" : true,
+            "title" : "Override Default Filters"
+          },
+          {
+            "columns" : 1,
+            "fields" : [
+              {
+                "activationID" : "rating.minimum.enabled",
+                "choices" : [
+                  {
+                    "title" : "2 stars",
+                    "value" : "2"
+                  },
+                  {
+                    "title" : "3 stars",
+                    "value" : "3"
+                  },
+                  {
+                    "title" : "4 stars",
+                    "value" : "4"
+                  },
+                  {
+                    "title" : "5 stars",
+                    "value" : "5"
+                  }
+                ],
+                "control" : "choice",
+                "defaultSecondaryValue" : "",
+                "defaultValue" : "2",
+                "id" : "rating.minimum",
+                "placeholder" : "",
+                "secondaryPlaceholder" : "",
+                "title" : "Minimum rating"
+              },
+              {
+                "activationID" : "pages.range.enabled",
+                "choices" : [
+
+                ],
+                "control" : "integerRange",
+                "defaultSecondaryValue" : "",
+                "defaultValue" : "",
+                "id" : "pages.from",
+                "placeholder" : "From",
+                "secondaryPlaceholder" : "To",
+                "secondaryValueID" : "pages.to",
+                "title" : "Page range"
+              }
+            ],
+            "id" : "limits",
+            "isAdvanced" : true,
+            "title" : "Limits"
+          }
+        ],
+        "subtitle" : "Categories, search targets, rating and page range.",
+        "title" : "Advanced Search"
+      },
+      "fieldTransforms" : {
+        "advanced.enabled" : [
+          {
+            "captureGroup" : 0,
+            "kind" : "lookupValue",
+            "pattern" : "oneFlag",
+            "replacement" : ""
+          }
+        ],
+        "filters.disableLanguage" : [
+          {
+            "captureGroup" : 0,
+            "kind" : "lookupValue",
+            "pattern" : "flagOn",
+            "replacement" : ""
+          }
+        ],
+        "filters.disableTag" : [
+          {
+            "captureGroup" : 0,
+            "kind" : "lookupValue",
+            "pattern" : "flagOn",
+            "replacement" : ""
+          }
+        ],
+        "filters.disableUploader" : [
+          {
+            "captureGroup" : 0,
+            "kind" : "lookupValue",
+            "pattern" : "flagOn",
+            "replacement" : ""
+          }
+        ],
+        "pages.range.enabled" : [
+          {
+            "captureGroup" : 0,
+            "kind" : "lookupValue",
+            "pattern" : "flagOn",
+            "replacement" : ""
+          }
+        ],
+        "rating.minimum.enabled" : [
+          {
+            "captureGroup" : 0,
+            "kind" : "lookupValue",
+            "pattern" : "flagOn",
+            "replacement" : ""
+          }
+        ],
+        "search.description" : [
+          {
+            "captureGroup" : 0,
+            "kind" : "lookupValue",
+            "pattern" : "flagOn",
+            "replacement" : ""
+          }
+        ],
+        "search.downvotedTags" : [
+          {
+            "captureGroup" : 0,
+            "kind" : "lookupValue",
+            "pattern" : "flagOn",
+            "replacement" : ""
+          }
+        ],
+        "search.expunged" : [
+          {
+            "captureGroup" : 0,
+            "kind" : "lookupValue",
+            "pattern" : "flagOn",
+            "replacement" : ""
+          }
+        ],
+        "search.lowPowerTags" : [
+          {
+            "captureGroup" : 0,
+            "kind" : "lookupValue",
+            "pattern" : "flagOn",
+            "replacement" : ""
+          }
+        ],
+        "search.name" : [
+          {
+            "captureGroup" : 0,
+            "kind" : "lookupValue",
+            "pattern" : "flagOn",
+            "replacement" : ""
+          }
+        ],
+        "search.onlyWithTorrents" : [
+          {
+            "captureGroup" : 0,
+            "kind" : "lookupValue",
+            "pattern" : "flagOn",
+            "replacement" : ""
+          }
+        ],
+        "search.tags" : [
+          {
+            "captureGroup" : 0,
+            "kind" : "lookupValue",
+            "pattern" : "flagOn",
+            "replacement" : ""
+          }
+        ],
+        "search.torrents" : [
+          {
+            "captureGroup" : 0,
+            "kind" : "lookupValue",
+            "pattern" : "flagOn",
+            "replacement" : ""
+          }
+        ]
+      }
+    },
+    "subscriptions" : {
+      "book" : {
+        "authors" : {
+          "allMatches" : false,
+          "expression" : "a[href*='/uploader/']",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssText",
+          "separator" : ",",
+          "transforms" : [
+
+          ]
+        },
+        "authorsSeparator" : ",",
+        "coverURL" : {
+          "allMatches" : false,
+          "attribute" : "data-src",
+          "expression" : "img",
+          "fallbackAttributes" : [
+            "src",
+            "srcset"
+          ],
+          "kind" : "cssAttribute",
+          "separator" : ",",
+          "transforms" : [
+            {
+              "captureGroup" : 1,
+              "kind" : "regularExpressionCapture",
+              "pattern" : "^(\\S+)",
+              "replacement" : ""
+            }
+          ]
+        },
+        "id" : {
+          "allMatches" : false,
+          "attribute" : "href",
+          "expression" : "a[href*='/g/']",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssAttribute",
+          "separator" : ",",
+          "transforms" : [
+            {
+              "captureGroup" : 1,
+              "kind" : "regularExpressionCapture",
+              "pattern" : "(?i)(/g/[0-9]+/[^/?#]+/?)",
+              "replacement" : ""
+            }
+          ]
+        },
+        "metadata" : {
+          "reader.badgeColorHex" : {
+            "allMatches" : false,
+            "expression" : ".cn, .cs, .glcat",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssText",
+            "separator" : ",",
+            "transforms" : [
+              {
+                "captureGroup" : 0,
+                "kind" : "lookupValue",
+                "pattern" : "categoryColors",
+                "replacement" : ""
+              }
+            ]
+          },
+          "reader.badgeTitle" : {
+            "allMatches" : false,
+            "expression" : ".cn, .cs, .glcat",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssText",
+            "separator" : ",",
+            "transforms" : [
+
+            ]
+          },
+          "reader.language" : {
+            "allMatches" : true,
+            "attribute" : "title",
+            "expression" : ".gt",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssAttribute",
+            "separator" : "\n",
+            "transforms" : [
+              {
+                "captureGroup" : 1,
+                "kind" : "regularExpressionCapture",
+                "pattern" : "(?i)language:([a-z ]+)",
+                "replacement" : ""
+              }
+            ]
+          },
+          "reader.published" : {
+            "allMatches" : false,
+            "expression" : "[id^='posted_']",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssText",
+            "separator" : ",",
+            "transforms" : [
+
+            ]
+          },
+          "reader.rating" : {
+            "allMatches" : false,
+            "attribute" : "style",
+            "expression" : ".ir",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssAttribute",
+            "separator" : ",",
+            "transforms" : [
+              {
+                "captureGroup" : 0,
+                "kind" : "backgroundPositionRating",
+                "pattern" : "",
+                "replacement" : ""
+              }
+            ]
+          },
+          "tags" : {
+            "allMatches" : true,
+            "attribute" : "title",
+            "expression" : ".gt",
+            "fallbackAttributes" : [
+
+            ],
+            "kind" : "cssAttribute",
+            "separator" : "\n",
+            "transforms" : [
+
+            ]
+          }
+        },
+        "pageCount" : {
+          "allMatches" : true,
+          "expression" : ".glthumb, .glhide, .gl3e, .gl5t",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssText",
+          "separator" : " ",
+          "transforms" : [
+            {
+              "captureGroup" : 1,
+              "kind" : "regularExpressionCapture",
+              "pattern" : "(?i)([\\d,]+)\\s+pages?",
+              "replacement" : ""
+            },
+            {
+              "captureGroup" : 0,
+              "kind" : "literalReplacement",
+              "pattern" : ",",
+              "replacement" : ""
+            }
+          ]
+        },
+        "title" : {
+          "allMatches" : false,
+          "expression" : ".glink",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssText",
+          "separator" : ",",
+          "transforms" : [
+
+          ]
+        }
+      },
+      "format" : "html",
+      "hasMore" : {
+        "allMatches" : false,
+        "expression" : "#unext:not(.unav), table.ptt td:last-child a",
+        "fallbackAttributes" : [
+
+        ],
+        "kind" : "cssExists",
+        "separator" : ",",
+        "transforms" : [
+
+        ]
+      },
+      "items" : {
+        "expression" : "tr:has(.glink)",
+        "kind" : "css"
+      },
+      "nextPageHref" : {
+        "allMatches" : false,
+        "attribute" : "href",
+        "expression" : "#unext:not(.unav)",
+        "fallbackAttributes" : [
+
+        ],
+        "kind" : "cssAttribute",
+        "separator" : ",",
+        "transforms" : [
+
+        ]
+      },
+      "request" : {
+        "body" : {
+
+        },
+        "bodyEncoding" : "none",
+        "bodyValueTypes" : {
+
+        },
+        "headers" : {
+
+        },
+        "method" : "GET",
+        "path" : "/watched",
+        "queryItems" : {
+          "advsearch" : "{{filter.advanced.enabled}}",
+          "f_cats" : "{{preferences.excludedCategories}}",
+          "f_sdesc" : "{{filter.search.description}}",
+          "f_sdt1" : "{{filter.search.lowPowerTags}}",
+          "f_sdt2" : "{{filter.search.downvotedTags}}",
+          "f_search" : "{{query}}",
+          "f_sfl" : "{{filter.filters.disableLanguage}}",
+          "f_sft" : "{{filter.filters.disableTag}}",
+          "f_sfu" : "{{filter.filters.disableUploader}}",
+          "f_sh" : "{{filter.search.expunged}}",
+          "f_sname" : "{{filter.search.name}}",
+          "f_sp" : "{{filter.pages.range.enabled}}",
+          "f_spf" : "{{filter.pages.from}}",
+          "f_spt" : "{{filter.pages.to}}",
+          "f_sr" : "{{filter.rating.minimum.enabled}}",
+          "f_srdd" : "{{filter.rating.minimum}}",
+          "f_stags" : "{{filter.search.tags}}",
+          "f_sto" : "{{filter.search.onlyWithTorrents}}",
+          "f_storr" : "{{filter.search.torrents}}",
+          "page" : "{{page}}"
+        }
+      }
+    },
+    "tagCatalog" : {
+      "usesBuiltInTagDatabase" : true
+    },
+    "torrents" : {
+      "format" : "html",
+      "items" : {
+        "expression" : "#torrentinfo form:has(a[href$='.torrent'])",
+        "kind" : "css"
+      },
+      "request" : {
+        "body" : {
+
+        },
+        "bodyEncoding" : "none",
+        "bodyValueTypes" : {
+
+        },
+        "headers" : {
+
+        },
+        "method" : "GET",
+        "path" : "/gallerytorrents.php",
+        "queryItems" : {
+          "gid" : "{{context.gid}}",
+          "t" : "{{context.token}}"
+        }
+      },
+      "torrent" : {
+        "downloadURL" : {
+          "allMatches" : false,
+          "attribute" : "href",
+          "expression" : "a[href$='.torrent']",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssAttribute",
+          "separator" : ",",
+          "transforms" : [
+
+          ]
+        },
+        "downloads" : {
+          "allMatches" : false,
+          "expression" : "td:contains(Downloads)",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssText",
+          "separator" : ",",
+          "transforms" : [
+            {
+              "captureGroup" : 0,
+              "kind" : "literalReplacement",
+              "pattern" : "Downloads:",
+              "replacement" : ""
+            }
+          ]
+        },
+        "peers" : {
+          "allMatches" : false,
+          "expression" : "td:contains(Peers)",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssText",
+          "separator" : ",",
+          "transforms" : [
+            {
+              "captureGroup" : 0,
+              "kind" : "literalReplacement",
+              "pattern" : "Peers:",
+              "replacement" : ""
+            }
+          ]
+        },
+        "posted" : {
+          "allMatches" : false,
+          "expression" : "td:contains(Posted)",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssText",
+          "separator" : ",",
+          "transforms" : [
+            {
+              "captureGroup" : 0,
+              "kind" : "literalReplacement",
+              "pattern" : "Posted:",
+              "replacement" : ""
+            }
+          ]
+        },
+        "seeders" : {
+          "allMatches" : false,
+          "expression" : "td:contains(Seeds)",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssText",
+          "separator" : ",",
+          "transforms" : [
+            {
+              "captureGroup" : 0,
+              "kind" : "literalReplacement",
+              "pattern" : "Seeds:",
+              "replacement" : ""
+            }
+          ]
+        },
+        "size" : {
+          "allMatches" : false,
+          "expression" : "td:contains(Size)",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssText",
+          "separator" : ",",
+          "transforms" : [
+            {
+              "captureGroup" : 0,
+              "kind" : "literalReplacement",
+              "pattern" : "Size:",
+              "replacement" : ""
+            }
+          ]
+        },
+        "title" : {
+          "allMatches" : false,
+          "expression" : "a[href$='.torrent']",
+          "fallbackAttributes" : [
+
+          ],
+          "kind" : "cssText",
+          "separator" : ",",
+          "transforms" : [
+
+          ]
+        }
+      }
+    },
+    "valueMaps" : {
+      "categoryColors" : {
+        "artist cg" : "#007AFF",
+        "asian porn" : "#FF3B30",
+        "cosplay" : "#FF2D55",
+        "doujinshi" : "#AF52DE",
+        "game cg" : "#34C759",
+        "image set" : "#FFCC00",
+        "manga" : "#FF9500",
+        "misc" : "#00C7BE",
+        "non-h" : "#8E8E93",
+        "western" : "#32ADE6"
+      },
+      "flagOn" : {
+        "false" : "",
+        "true" : "on"
+      },
+      "oneFlag" : {
+        "false" : "",
+        "true" : "1"
+      }
+    },
+    "watchedTags" : {
+      "addRequest" : {
+        "body" : {
+          "tagcolor_new" : "",
+          "tagname_new" : "{{action.tag}}",
+          "tagwatch_new" : "on",
+          "tagweight_new" : "10",
+          "usertag_action" : "add",
+          "usertag_target" : "0"
+        },
+        "bodyEncoding" : "form",
+        "bodyValueTypes" : {
+
+        },
+        "headers" : {
+
+        },
+        "method" : "POST",
+        "path" : "/mytags",
+        "queryItems" : {
+
+        }
+      },
+      "format" : "html",
+      "items" : {
+        "expression" : "table tbody tr",
+        "kind" : "css"
+      },
+      "removeRequest" : {
+        "body" : {
+          "tagname_delete" : "{{action.tag}}",
+          "usertag_action" : "delete",
+          "usertag_target" : "0"
+        },
+        "bodyEncoding" : "form",
+        "bodyValueTypes" : {
+
+        },
+        "headers" : {
+
+        },
+        "method" : "POST",
+        "path" : "/mytags",
+        "queryItems" : {
+
+        }
+      },
+      "request" : {
+        "body" : {
+
+        },
+        "bodyEncoding" : "none",
+        "bodyValueTypes" : {
+
+        },
+        "headers" : {
+
+        },
+        "method" : "GET",
+        "path" : "/usertags.php",
+        "queryItems" : {
+
+        }
+      },
+      "value" : {
+        "allMatches" : false,
+        "expression" : "a[href*='/tag/']",
+        "fallbackAttributes" : [
+
+        ],
+        "kind" : "cssText",
+        "separator" : ",",
+        "transforms" : [
+
+        ]
+      }
+    }
+  },
+  "sourceID" : "ehxr"
+}
