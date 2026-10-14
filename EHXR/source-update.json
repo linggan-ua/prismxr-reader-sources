@@ -1,7 +1,7 @@
 {
-  "notes": "Tag browser available in the App Store build; web login survives Cloudflare challenges",
-  "publishedAt": "2026-10-14T14:42:56Z",
+  "notes": "Browse and search now page with the site's cursor; jump-by-date uses the new date format; downloads move to the app's Documents folder",
+  "publishedAt": "2026-10-14T15:54:36Z",
   "sourceID": "ehxr",
   "url": "https://raw.githubusercontent.com/linggan-ua/prismxr-reader-sources/main/EHXR/EHXR.prismsource",
-  "version": "1.2.0"
+  "version": "1.2.1"
 }
